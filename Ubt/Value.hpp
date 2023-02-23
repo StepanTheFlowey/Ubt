@@ -35,6 +35,9 @@ namespace ubt {
       Vector2i32,
       Vector2i64,
 
+      Vector2f,
+      Vector2d,
+
       Vector3u8,
       Vector3u16,
       Vector3u32,
@@ -44,6 +47,9 @@ namespace ubt {
       Vector3i16,
       Vector3i32,
       Vector3i64,
+
+      Vector3f,
+      Vector3d,
 
       String,
       Array,
@@ -102,6 +108,15 @@ namespace ubt {
         int64_t y;
       } vector2i64;
 
+      struct Vector2f {
+        float x;
+        float y;
+      } vector2f;
+      struct Vector2d {
+        double x;
+        double y;
+      } vector2d;
+
       struct Vector3u8 {
         uint8_t x;
         uint8_t y;
@@ -143,6 +158,17 @@ namespace ubt {
         uint64_t y;
         uint64_t z;
       } vector3i64;
+
+      struct Vector3f {
+        float x;
+        float y;
+        float z;
+      } vector3f;
+      struct Vector3d {
+        double x;
+        double y;
+        double z;
+      } vector3d;
     };
 
     Value() = default;
