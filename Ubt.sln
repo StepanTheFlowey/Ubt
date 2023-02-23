@@ -6,10 +6,16 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ubt", "Ubt\Ubt.vcxproj", "{2AE78132-2B3C-48C8-B25C-AB5345316F8C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UbtTool", "UbtTool\UbtTool.vcxproj", "{90DC7BD6-EEE1-4A3F-8327-7C9819F03259}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2AE78132-2B3C-48C8-B25C-AB5345316F8C} = {2AE78132-2B3C-48C8-B25C-AB5345316F8C}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Gbt", "Gbt\Gbt.vcxproj", "{C562A707-7C29-43BB-9370-24BE6B33CA9C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GbtTool", "GbtTool\GbtTool.vcxproj", "{C1471188-0D01-46A0-8468-E9E65548B6C8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C562A707-7C29-43BB-9370-24BE6B33CA9C} = {C562A707-7C29-43BB-9370-24BE6B33CA9C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
