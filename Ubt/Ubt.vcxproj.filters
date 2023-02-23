@@ -17,6 +17,9 @@
     <ClInclude Include="Value.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkOrderConvert.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Document.cpp">
