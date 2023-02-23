@@ -10,4 +10,20 @@
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Document.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Value.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Document.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Value.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>
