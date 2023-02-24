@@ -38,6 +38,7 @@ namespace ubt {
       break;
 
       case Type::Uint8:
+      case Type::Int8:
       {
         auto n = hton(thing.getFixed().uint8);
         stream.write(reinterpret_cast<const char*>(&n), sizeof(n));
@@ -45,6 +46,7 @@ namespace ubt {
       break;
 
       case Type::Uint16:
+      case Type::Int16:
       {
         auto n = hton(thing.getFixed().uint16);
         stream.write(reinterpret_cast<const char*>(&n), sizeof(n));
@@ -52,6 +54,8 @@ namespace ubt {
       break;
 
       case Type::Uint32:
+      case Type::Int32:
+      case Type::Float:
       {
         auto n = hton(thing.getFixed().uint32);
         stream.write(reinterpret_cast<const char*>(&n), sizeof(n));
@@ -59,50 +63,10 @@ namespace ubt {
       break;
 
       case Type::Uint64:
-      {
-        auto n = hton(thing.getFixed().uint64);
-        stream.write(reinterpret_cast<const char*>(&n), sizeof(n));
-      }
-      break;
-
-      case Type::Int8:
-      {
-        auto n = hton(thing.getFixed().int8);
-        stream.write(reinterpret_cast<const char*>(&n), sizeof(n));
-      }
-      break;
-
-      case Type::Int16:
-      {
-        auto n = hton(thing.getFixed().int16);
-        stream.write(reinterpret_cast<const char*>(&n), sizeof(n));
-      }
-      break;
-
-      case Type::Int32:
-      {
-        auto n = hton(thing.getFixed().int32);
-        stream.write(reinterpret_cast<const char*>(&n), sizeof(n));
-      }
-      break;
-
       case Type::Int64:
-      {
-        auto n = hton(thing.getFixed().int64);
-        stream.write(reinterpret_cast<const char*>(&n), sizeof(n));
-      }
-      break;
-
-      case Type::Float:
-      {
-        auto n = thing.getFixed().Float;
-        stream.write(reinterpret_cast<const char*>(&n), sizeof(n));
-      }
-      break;
-
       case Type::Double:
       {
-        auto n = thing.getFixed().Double;
+        auto n = hton(thing.getFixed().uint64);
         stream.write(reinterpret_cast<const char*>(&n), sizeof(n));
       }
       break;
@@ -131,6 +95,7 @@ namespace ubt {
 
       case Type::Vector2u32:
       case Type::Vector2i32:
+      case Type::Vector2f:
       {
         auto x = hton(thing.getFixed().vector2u32.x);
         auto y = hton(thing.getFixed().vector2u32.y);
@@ -142,29 +107,10 @@ namespace ubt {
 
       case Type::Vector2u64:
       case Type::Vector2i64:
+      case Type::Vector2d:
       {
         auto x = hton(thing.getFixed().vector2u64.x);
         auto y = hton(thing.getFixed().vector2u64.y);
-
-        stream.write(reinterpret_cast<const char*>(&x), sizeof(x));
-        stream.write(reinterpret_cast<const char*>(&y), sizeof(y));
-      }
-      break;
-
-      case Type::Vector2f:
-      {
-        auto x = thing.getFixed().vector2f.x;
-        auto y = thing.getFixed().vector2f.y;
-
-        stream.write(reinterpret_cast<const char*>(&x), sizeof(x));
-        stream.write(reinterpret_cast<const char*>(&y), sizeof(y));
-      }
-      break;
-
-      case Type::Vector2d:
-      {
-        auto x = thing.getFixed().vector2d.x;
-        auto y = thing.getFixed().vector2d.y;
 
         stream.write(reinterpret_cast<const char*>(&x), sizeof(x));
         stream.write(reinterpret_cast<const char*>(&y), sizeof(y));
@@ -199,6 +145,7 @@ namespace ubt {
 
       case Type::Vector3u32:
       case Type::Vector3i32:
+      case Type::Vector3f:
       {
         auto x = hton(thing.getFixed().vector3u32.x);
         auto y = hton(thing.getFixed().vector3u32.y);
@@ -212,6 +159,7 @@ namespace ubt {
 
       case Type::Vector3u64:
       case Type::Vector3i64:
+      case Type::Vector3d:
       {
         auto x = hton(thing.getFixed().vector3u64.x);
         auto y = hton(thing.getFixed().vector3u64.y);
@@ -223,28 +171,15 @@ namespace ubt {
       }
       break;
 
-      case Type::Vector3f:
-      {
-        auto x = thing.getFixed().vector3f.x;
-        auto y = thing.getFixed().vector3f.y;
-        auto z = thing.getFixed().vector3f.z;
-
-        stream.write(reinterpret_cast<const char*>(&x), sizeof(x));
-        stream.write(reinterpret_cast<const char*>(&y), sizeof(y));
-        stream.write(reinterpret_cast<const char*>(&z), sizeof(z));
-      }
+      case Type::String:
+      saveString(thing.getString(), stream);
       break;
 
-      case Type::Vector3d:
-      {
-        auto x = thing.getFixed().vector3d.x;
-        auto y = thing.getFixed().vector3d.y;
-        auto z = thing.getFixed().vector3d.z;
-
-        stream.write(reinterpret_cast<const char*>(&x), sizeof(x));
-        stream.write(reinterpret_cast<const char*>(&y), sizeof(y));
-        stream.write(reinterpret_cast<const char*>(&z), sizeof(z));
+      case Type::Array:
+      for(auto& i : thing.getArray()) {
+        saveThing(i, std::string(), stream);
       }
+      saveThing(Type::ArrayEnd, std::string(), stream);
       break;
 
       case Type::Object:
