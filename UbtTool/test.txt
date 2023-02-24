@@ -1,3 +1,7 @@
 Object root
   Int32 name 54
-EndObj
+  Object d3d
+    Uint16 three 354
+    Int8 four -45
+  ObjectEnd
+ObjectEnd
