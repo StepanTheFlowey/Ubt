@@ -7,6 +7,34 @@ namespace ubt {
     setType(type);
   }
 
+  Value::Value(const Value& value) :
+    type_(value.type_),
+    fixed_(value.fixed_) {
+
+    switch(type_) {
+      case Value::Type::String:
+      variable_.ptrString = new std::string(*value.variable_.ptrString);
+      break;
+
+      case Value::Type::Array:
+      variable_.ptrArray = new std::vector<Value>(*value.variable_.ptrArray);
+      break;
+
+      case Value::Type::Object:
+      variable_.ptrObject = new std::unordered_map<std::string, Value>(*value.variable_.ptrObject);
+      break;
+    }
+  }
+
+  Value::Value(Value&& value) :
+    type_(std::exchange(value.type_, Type::Null)),
+    fixed_(value.fixed_),
+    variable_(value.variable_) {}
+
+  Value::~Value() {
+    setType(Type::Null);
+  }
+
   Value::Type Value::getType() const {
     return type_;
   }
@@ -98,5 +126,35 @@ namespace ubt {
     }
 
     return (*variable_.ptrObject)[string];
+  }
+
+  Value& Value::operator=(const Value& value) {
+    setType(Type::Null);
+
+    switch(value.type_) {
+      case Value::Type::String:
+      variable_.ptrString = new std::string(*value.variable_.ptrString);
+      break;
+
+      case Value::Type::Array:
+      variable_.ptrArray = new std::vector<Value>(*value.variable_.ptrArray);
+      break;
+
+      case Value::Type::Object:
+      variable_.ptrObject = new std::unordered_map<std::string, Value>(*value.variable_.ptrObject);
+      break;
+    }
+
+    type_ = value.type_;
+
+    return *this;
+  }
+
+  Value& Value::operator=(Value&& value) noexcept {
+    type_ = std::exchange(value.type_, Type::Null);
+    fixed_ = value.fixed_;
+    variable_ = value.variable_;
+
+    return *this;
   }
 }

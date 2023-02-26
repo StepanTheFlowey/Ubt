@@ -22,34 +22,34 @@ namespace ubt {
       Int32,
       Int64,
 
-      Float,
-      Double,
+      Real32,
+      Real64,
 
-      Vector2u8,
-      Vector2u16,
-      Vector2u32,
-      Vector2u64,
+      Vec2u8,
+      Vec2u16,
+      Vec2u32,
+      Vec2u64,
 
-      Vector2i8,
-      Vector2i16,
-      Vector2i32,
-      Vector2i64,
+      Vec2i8,
+      Vec2i16,
+      Vec2i32,
+      Vec2i64,
 
-      Vector2f,
-      Vector2d,
+      Vec2f,
+      Vec2d,
 
-      Vector3u8,
-      Vector3u16,
-      Vector3u32,
-      Vector3u64,
+      Vec3u8,
+      Vec3u16,
+      Vec3u32,
+      Vec3u64,
 
-      Vector3i8,
-      Vector3i16,
-      Vector3i32,
-      Vector3i64,
+      Vec3i8,
+      Vec3i16,
+      Vec3i32,
+      Vec3i64,
 
-      Vector3f,
-      Vector3d,
+      Vec3f,
+      Vec3d,
 
       String,
       Array,
@@ -71,109 +71,111 @@ namespace ubt {
       int32_t int32;
       int64_t int64;
 
-      float Float;
-      double Double;
+      float real32;
+      double real64;
 
-      struct Vector2u8 {
+      struct Vec2u8 {
         uint8_t x;
         uint8_t y;
-      } vector2u8;
-      struct Vector2u16 {
+      } vec2u8;
+      struct Vec2u16 {
         uint16_t x;
         uint16_t y;
-      } vector2u16;
-      struct Vector2u32 {
+      } vec2u16;
+      struct Vec2u32 {
         uint32_t x;
         uint32_t y;
-      } vector2u32;
-      struct Vector2u64 {
+      } vec2u32;
+      struct Vec2u64 {
         uint64_t x;
         uint64_t y;
-      } vector2u64;
+      } vec2u64;
 
-      struct Vector2i8 {
+      struct Vec2i8 {
         int8_t x;
         int8_t y;
-      } vector2i8;
-      struct Vector2i16 {
+      } vec2i8;
+      struct Vec2i16 {
         int16_t x;
         int16_t y;
-      } vector2i16;
-      struct Vector2i32 {
+      } vec2i16;
+      struct Vec2i32 {
         int32_t x;
         int32_t y;
-      } vector2i32;
-      struct Vector2i64 {
+      } vec2i32;
+      struct Vec2i64 {
         int64_t x;
         int64_t y;
-      } vector2i64;
+      } vec2i64;
 
-      struct Vector2f {
+      struct Vec2f {
         float x;
         float y;
-      } vector2f;
-      struct Vector2d {
+      } vec2f;
+      struct Vec2d {
         double x;
         double y;
-      } vector2d;
+      } vec2d;
 
-      struct Vector3u8 {
+      struct Vec3u8 {
         uint8_t x;
         uint8_t y;
         uint8_t z;
-      } vector3u8;
-      struct Vector3u16 {
+      } vec3u8;
+      struct Vec3u16 {
         uint16_t x;
         uint16_t y;
         uint16_t z;
-      } vector3u16;
-      struct Vector3u32 {
+      } vec3u16;
+      struct Vec3u32 {
         uint32_t x;
         uint32_t y;
         uint32_t z;
-      } vector3u32;
-      struct Vector3u64 {
+      } vec3u32;
+      struct Vec3u64 {
         uint64_t x;
         uint64_t y;
         uint64_t z;
-      } vector3u64;
+      } vec3u64;
 
-      struct Vector3i8 {
+      struct Vec3i8 {
         uint8_t x;
         uint8_t y;
         uint8_t z;
-      } vector3i8;
-      struct Vector3i16 {
+      } vec3i8;
+      struct Vec3i16 {
         uint16_t x;
         uint16_t y;
         uint16_t z;
-      } vector3i16;
-      struct Vector3i32 {
+      } vec3i16;
+      struct Vec3i32 {
         uint32_t x;
         uint32_t y;
         uint32_t z;
-      } vector3i32;
-      struct Vector3i64 {
+      } vec3i32;
+      struct Vec3i64 {
         uint64_t x;
         uint64_t y;
         uint64_t z;
-      } vector3i64;
+      } vec3i64;
 
-      struct Vector3f {
+      struct Vec3f {
         float x;
         float y;
         float z;
-      } vector3f;
-      struct Vector3d {
+      } vec3f;
+      struct Vec3d {
         double x;
         double y;
         double z;
-      } vector3d;
+      } vec3d;
     };
 
     Value() = default;
     Value(const Type type);
-    ~Value() = default;
+    Value(const Value& value);
+    Value(Value&& value);
+    ~Value() ;
 
     Type getType() const;
     void setType(const Type type);
@@ -192,6 +194,9 @@ namespace ubt {
 
     Value& operator[](const uintptr_t index);
     Value& operator[](const std::string& string);
+
+    Value& operator=(const Value& value);
+    Value& operator=(Value&& value) noexcept;
   protected:
     union Variable {
       std::string* ptrString = nullptr;
@@ -200,7 +205,7 @@ namespace ubt {
     };
 
     Type type_ = Type::Null;
-    Fixed fixed_;
+    Fixed fixed_{};
     Variable variable_;
   };
 }

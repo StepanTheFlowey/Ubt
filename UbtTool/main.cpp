@@ -12,7 +12,12 @@ void verbose(const std::string& message) {
   }
 }
 
+bool doReadTagName = true;
 std::string compileName(std::istream& input) {
+  if(!doReadTagName) {
+    return std::string();
+  }
+
   std::string name;
   input >> name;
   verbose("Name \'" + name + '\'');
@@ -141,6 +146,73 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
     output.setFixed(fixed);
     break;
 
+    case strHashSwitch("Real32"):
+    verbose("Tag Real32");
+    name = compileName(input);
+
+    input >> word;
+    fixed.real32 = std::stof(word);
+
+    output.setType(ubt::Value::Type::Real32);
+    output.setFixed(fixed);
+    break;
+
+    case strHashSwitch("Real64"):
+    verbose("Tag Real64");
+    name = compileName(input);
+
+    input >> word;
+    fixed.real64 = std::stod(word);
+
+    output.setType(ubt::Value::Type::Real64);
+    output.setFixed(fixed);
+    break;
+
+    case strHashSwitch("Vec2u8"):
+    verbose("Tag Vec2u8");
+    name = compileName(input);
+
+    input >> word;
+    fixed.vec2u8.x = std::stoi(word);
+
+    input >> word;
+    fixed.vec2u8.y = std::stoi(word);
+
+    output.setType(ubt::Value::Type::Vec2u8);
+    output.setFixed(fixed);
+    break;
+
+    case strHashSwitch("Array"):
+    verbose("Tag Array");
+    name = compileName(input);
+
+    output.setType(ubt::Value::Type::Array);
+    output.getArray().reserve(32);
+    doReadTagName = false;
+
+    {
+      uintptr_t c = 0;
+      ubt::Value value;
+      do {
+        if(input.eof()) {
+          std::cout << "Unexpected file end. Array scope not closed!" << std::endl;
+          exit(EXIT_FAILURE);
+        }
+
+        compile(input, value, word);
+        output.getArray().push_back(value);
+        doReadTagName = false;
+
+      } while(value.getType() != ubt::Value::Type::ArrayEnd);
+    }
+    doReadTagName = true;
+    break;
+
+    case strHashSwitch("ArrayEnd"):
+    verbose("Tag ArrayEnd");
+    output.setType(ubt::Value::Type::ArrayEnd);
+    break;
+
     case strHashSwitch("Object"):
     verbose("Tag Object");
     name = compileName(input);
@@ -150,6 +222,11 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
     {
       ubt::Value value;
       do {
+        if(input.eof()) {
+          std::cout << "Unexpected file end. Object scope not closed!" << std::endl;
+          exit(EXIT_FAILURE);
+        }
+
         compile(input, value, word);
         output[word] = value;
       } while(value.getType() != ubt::Value::Type::ObjectEnd);
@@ -169,8 +246,12 @@ void compile(std::istream& input, ubt::Value& output) {
   compile(input, output, name);
 }
 
-void decompile(std::istream& input, std::ostream& output) {
+void decompile(ubt::Value& value, std::ostream& output, const std::string& name) {
 
+}
+
+void decompile(ubt::Value& value, std::ostream& output) {
+  decompile(value, output, std::string());
 }
 
 int main(int argc, char** argv) {
@@ -214,25 +295,34 @@ int main(int argc, char** argv) {
 
 
   if(doDecompile) {
-
-  }
-  else {
-    ubt::Document document;
-    std::ifstream fileInput(filenameInput);
-    if(!fileInput) {
-      std::cout << "Failed to open input file." << std::endl;
-      return EXIT_FAILURE;
-    }
-
-    compile(fileInput, document);
-
     std::ofstream fileOutput(filenameOutput);
+
     if(!fileOutput) {
       std::cout << "Failed to open output file." << std::endl;
       return EXIT_FAILURE;
     }
 
-    document.save(filenameOutput);
+    ubt::Document document;
+
+    if(!document.load(filenameInput)) {
+      std::cout << "Failed to load input." << std::endl;
+      return EXIT_SUCCESS;
+    }
+
+    decompile(document, fileOutput);
+  }
+  else {
+    ubt::Document document;
+    std::ifstream fileInput(filenameInput);
+    if(!fileInput) {
+    }
+
+    compile(fileInput, document);
+
+    if(!document.save(filenameOutput)) {
+      std::cout << "Failed to save output." << std::endl;
+      return EXIT_FAILURE;
+    }
   }
 
   return EXIT_SUCCESS;
