@@ -26,7 +26,7 @@ namespace ubt {
     }
   }
 
-  Value::Value(Value&& value) :
+  Value::Value(Value&& value) noexcept :
     type_(std::exchange(value.type_, Type::Null)),
     fixed_(value.fixed_),
     variable_(value.variable_) {}

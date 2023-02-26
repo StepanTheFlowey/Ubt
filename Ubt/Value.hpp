@@ -174,7 +174,7 @@ namespace ubt {
     Value() = default;
     Value(const Type type);
     Value(const Value& value);
-    Value(Value&& value);
+    Value(Value&& value) noexcept;
     ~Value() ;
 
     Type getType() const;
