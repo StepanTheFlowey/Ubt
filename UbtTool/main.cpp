@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <set>
-#include "switch.h"
+#include "StringSwitch.h"
 #include "../Ubt/Document.hpp"
 
 bool beVerbose = false;
@@ -295,29 +295,31 @@ int main(int argc, char** argv) {
 
 
   if(doDecompile) {
-    std::ofstream fileOutput(filenameOutput);
-
-    if(!fileOutput) {
-      std::cout << "Failed to open output file." << std::endl;
-      return EXIT_FAILURE;
-    }
-
     ubt::Document document;
-
     if(!document.load(filenameInput)) {
       std::cout << "Failed to load input." << std::endl;
       return EXIT_SUCCESS;
     }
 
-    decompile(document, fileOutput);
-  }
-  else {
-    ubt::Document document;
-    std::ifstream fileInput(filenameInput);
-    if(!fileInput) {
+    std::ofstream fileOutput(filenameOutput);
+    if(!fileOutput) {
+      std::cout << "Failed to open output file." << std::endl;
+      return EXIT_FAILURE;
     }
 
+    decompile(document, fileOutput);
+    fileOutput.close();
+  }
+  else {
+    std::ifstream fileInput(filenameInput);
+    if(!fileInput) {
+      std::cout << "Failed to open input file." << std::endl;
+      return EXIT_FAILURE;
+    }
+
+    ubt::Document document;
     compile(fileInput, document);
+    fileInput.close();
 
     if(!document.save(filenameOutput)) {
       std::cout << "Failed to save output." << std::endl;
