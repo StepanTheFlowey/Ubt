@@ -8,7 +8,7 @@ namespace ubt {
   class Value {
   public:
 
-    enum class Type {
+    enum class Type : uint8_t {
       Null = 0,
       Boolean,
 
@@ -175,7 +175,7 @@ namespace ubt {
     Value(const Type type);
     Value(const Value& value);
     Value(Value&& value) noexcept;
-    ~Value() ;
+    ~Value();
 
     Type getType() const;
     void setType(const Type type);

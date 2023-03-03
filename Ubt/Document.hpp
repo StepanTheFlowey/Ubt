@@ -14,8 +14,8 @@ namespace ubt {
     bool save(const std::string& filename);
   protected:
 
-    void loadString(std::string& string, std::istream& input);
-    void loadThing(Value& thing, std::string& name, std::istream& input);
+    void loadString(std::string* string, std::istream& input);
+    void loadThing(Value& thing, std::string* name, std::istream& input);
 
     void saveString(const std::string& string, std::ostream& stream);
     void saveThing(const Value& thing, const std::string& name, std::ostream& stream);

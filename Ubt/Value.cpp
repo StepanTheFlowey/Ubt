@@ -13,16 +13,16 @@ namespace ubt {
 
     switch(type_) {
       case Value::Type::String:
-      variable_.ptrString = new std::string(*value.variable_.ptrString);
-      break;
+        variable_.ptrString = new std::string(*value.variable_.ptrString);
+        break;
 
       case Value::Type::Array:
-      variable_.ptrArray = new std::vector<Value>(*value.variable_.ptrArray);
-      break;
+        variable_.ptrArray = new std::vector<Value>(*value.variable_.ptrArray);
+        break;
 
       case Value::Type::Object:
-      variable_.ptrObject = new std::unordered_map<std::string, Value>(*value.variable_.ptrObject);
-      break;
+        variable_.ptrObject = new std::unordered_map<std::string, Value>(*value.variable_.ptrObject);
+        break;
     }
   }
 
@@ -133,19 +133,20 @@ namespace ubt {
 
     switch(value.type_) {
       case Value::Type::String:
-      variable_.ptrString = new std::string(*value.variable_.ptrString);
-      break;
+        variable_.ptrString = new std::string(*value.variable_.ptrString);
+        break;
 
       case Value::Type::Array:
-      variable_.ptrArray = new std::vector<Value>(*value.variable_.ptrArray);
-      break;
+        variable_.ptrArray = new std::vector<Value>(*value.variable_.ptrArray);
+        break;
 
       case Value::Type::Object:
-      variable_.ptrObject = new std::unordered_map<std::string, Value>(*value.variable_.ptrObject);
-      break;
+        variable_.ptrObject = new std::unordered_map<std::string, Value>(*value.variable_.ptrObject);
+        break;
     }
 
     type_ = value.type_;
+    fixed_ = value.fixed_;
 
     return *this;
   }
