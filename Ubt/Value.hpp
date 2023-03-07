@@ -35,8 +35,8 @@ namespace ubt {
       Vec2i32,
       Vec2i64,
 
-      Vec2f,
-      Vec2d,
+      Vec2r32,
+      Vec2r64,
 
       Vec3u8,
       Vec3u16,
@@ -48,8 +48,8 @@ namespace ubt {
       Vec3i32,
       Vec3i64,
 
-      Vec3f,
-      Vec3d,
+      Vec3r32,
+      Vec3r64,
 
       String,
       Array,
@@ -108,14 +108,14 @@ namespace ubt {
         int64_t y;
       } vec2i64;
 
-      struct Vec2f {
+      struct Vec2r32 {
         float x;
         float y;
-      } vec2f;
-      struct Vec2d {
+      } vec2r32;
+      struct Vec2r64 {
         double x;
         double y;
-      } vec2d;
+      } vec2r64;
 
       struct Vec3u8 {
         uint8_t x;
@@ -159,16 +159,16 @@ namespace ubt {
         uint64_t z;
       } vec3i64;
 
-      struct Vec3f {
+      struct Vec3r32 {
         float x;
         float y;
         float z;
-      } vec3f;
-      struct Vec3d {
+      } vec3r32;
+      struct Vec3r64 {
         double x;
         double y;
         double z;
-      } vec3d;
+      } vec3r64;
     };
 
     Value() = default;
@@ -198,6 +198,7 @@ namespace ubt {
     Value& operator=(const Value& value);
     Value& operator=(Value&& value) noexcept;
   protected:
+
     union Variable {
       std::string* ptrString = nullptr;
       std::vector<Value>* ptrArray;

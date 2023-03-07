@@ -14,11 +14,12 @@ void verbose(const std::string& message) {
 
 bool doReadTagName = true;
 std::string compileName(std::istream& input) {
+  std::string name;
+
   if(!doReadTagName) {
-    return std::string();
+    return name;
   }
 
-  std::string name;
   input >> name;
   verbose("Name \'" + name + '\'');
   return name;
@@ -285,12 +286,12 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       name = compileName(input);
 
       input >> word;
-      fixed.vec2f.x = std::stof(word);
+      fixed.vec2r32.x = std::stof(word);
 
       input >> word;
-      fixed.vec2f.y = std::stof(word);
+      fixed.vec2r32.y = std::stof(word);
 
-      output.setType(ubt::Value::Type::Vec2f);
+      output.setType(ubt::Value::Type::Vec2r32);
       output.setFixed(fixed);
       break;
 
@@ -299,12 +300,12 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       name = compileName(input);
 
       input >> word;
-      fixed.vec2d.x = std::stod(word);
+      fixed.vec2r64.x = std::stod(word);
 
       input >> word;
-      fixed.vec2d.y = std::stod(word);
+      fixed.vec2r64.y = std::stod(word);
 
-      output.setType(ubt::Value::Type::Vec2d);
+      output.setType(ubt::Value::Type::Vec2r64);
       output.setFixed(fixed);
       break;
 
@@ -449,15 +450,15 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       name = compileName(input);
 
       input >> word;
-      fixed.vec3f.x = std::stof(word);
+      fixed.vec3r32.x = std::stof(word);
 
       input >> word;
-      fixed.vec3f.y = std::stof(word);
+      fixed.vec3r32.y = std::stof(word);
 
       input >> word;
-      fixed.vec3f.z = std::stof(word);
+      fixed.vec3r32.z = std::stof(word);
 
-      output.setType(ubt::Value::Type::Vec3f);
+      output.setType(ubt::Value::Type::Vec3r32);
       output.setFixed(fixed);
       break;
 
@@ -466,15 +467,15 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       name = compileName(input);
 
       input >> word;
-      fixed.vec3d.x = std::stod(word);
+      fixed.vec3r64.x = std::stod(word);
 
       input >> word;
-      fixed.vec3d.y = std::stod(word);
+      fixed.vec3r64.y = std::stod(word);
 
       input >> word;
-      fixed.vec3d.z = std::stod(word);
+      fixed.vec3r64.z = std::stod(word);
 
-      output.setType(ubt::Value::Type::Vec3d);
+      output.setType(ubt::Value::Type::Vec3r64);
       output.setFixed(fixed);
       break;
 
@@ -558,7 +559,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
 }
 
 void compile(std::istream& input, ubt::Value& output) {
-  std::string name("");
+  std::string name;
 
   compile(input, output, name);
 }
@@ -572,35 +573,35 @@ void decompile(ubt::Value& value, std::ostream& output, const std::string& name,
       break;
 
     case ubt::Value::Type::Uint8:
-      output << "Uint8 " << name << ' ' << std::to_string(value.getFixed().uint8) << '\n';
+      output << "Uint8 " << name << ' ' << static_cast<unsigned>(value.getFixed().uint8) << '\n';
       break;
 
     case ubt::Value::Type::Uint16:
-      output << "Uint16 " << name << ' ' << std::to_string(value.getFixed().uint16) << '\n';
+      output << "Uint16 " << name << ' ' << value.getFixed().uint16 << '\n';
       break;
 
     case ubt::Value::Type::Uint32:
-      output << "Uint32 " << name << ' ' << std::to_string(value.getFixed().uint32) << '\n';
+      output << "Uint32 " << name << ' ' << value.getFixed().uint32 << '\n';
       break;
 
     case ubt::Value::Type::Uint64:
-      output << "Uint64 " << name << ' ' << std::to_string(value.getFixed().uint64) << '\n';
+      output << "Uint64 " << name << ' ' << value.getFixed().uint64 << '\n';
       break;
 
     case ubt::Value::Type::Int8:
-      output << "Int8 " << name << ' ' << std::to_string(value.getFixed().int8) << '\n';
+      output << "Int8 " << name << ' ' << static_cast<int>(value.getFixed().int8) << '\n';
       break;
 
     case ubt::Value::Type::Int16:
-      output << "Int16 " << name << ' ' << std::to_string(value.getFixed().int16) << '\n';
+      output << "Int16 " << name << ' ' << value.getFixed().int16 << '\n';
       break;
 
     case ubt::Value::Type::Int32:
-      output << "Int32 " << name << ' ' << std::to_string(value.getFixed().int32) << '\n';
+      output << "Int32 " << name << ' ' << value.getFixed().int32 << '\n';
       break;
 
     case ubt::Value::Type::Int64:
-      output << "Int64 " << name << ' ' << std::to_string(value.getFixed().int64) << '\n';
+      output << "Int64 " << name << ' ' << value.getFixed().int64 << '\n';
       break;
 
     case ubt::Value::Type::Real32:
@@ -617,140 +618,140 @@ void decompile(ubt::Value& value, std::ostream& output, const std::string& name,
 
     case ubt::Value::Type::Vec2u8:
       output << "Vec2u8 " << name << ' '
-        << std::to_string(value.getFixed().vec2u8.x) << ' '
-        << std::to_string(value.getFixed().vec2u8.y) << '\n';
+        << static_cast<unsigned>(value.getFixed().vec2u8.x) << ' '
+        << static_cast<unsigned>(value.getFixed().vec2u8.y) << '\n';
       break;
 
     case ubt::Value::Type::Vec2u16:
       output << "Vec2u16 " << name << ' '
-        << std::to_string(value.getFixed().vec2u16.x) << ' '
-        << std::to_string(value.getFixed().vec2u16.y) << '\n';
+        << value.getFixed().vec2u16.x << ' '
+        << value.getFixed().vec2u16.y << '\n';
       break;
 
     case ubt::Value::Type::Vec2u32:
       output << "Vec2u32 " << name << ' '
-        << std::to_string(value.getFixed().vec2u32.x) << ' '
-        << std::to_string(value.getFixed().vec2u32.y) << '\n';
+        << value.getFixed().vec2u32.x << ' '
+        << value.getFixed().vec2u32.y << '\n';
       break;
 
     case ubt::Value::Type::Vec2u64:
       output << "Vec2u64 " << name << ' '
-        << std::to_string(value.getFixed().vec2u64.x) << ' '
-        << std::to_string(value.getFixed().vec2u64.y) << '\n';
+        << value.getFixed().vec2u64.x << ' '
+        << value.getFixed().vec2u64.y << '\n';
       break;
 
     case ubt::Value::Type::Vec2i8:
-      output << "Vec2u8 " << name << ' '
-        << std::to_string(value.getFixed().vec2i8.x) << ' '
-        << std::to_string(value.getFixed().vec2i8.y) << '\n';
+      output << "Vec2i8 " << name << ' '
+        << static_cast<int>(value.getFixed().vec2i8.x) << ' '
+        << static_cast<int>(value.getFixed().vec2i8.y) << '\n';
       break;
 
     case ubt::Value::Type::Vec2i16:
-      output << "Vec2u16 " << name << ' '
-        << std::to_string(value.getFixed().vec2i16.x) << ' '
-        << std::to_string(value.getFixed().vec2i16.y) << '\n';
+      output << "Vec2i16 " << name << ' '
+        << value.getFixed().vec2i16.x << ' '
+        << value.getFixed().vec2i16.y << '\n';
       break;
 
     case ubt::Value::Type::Vec2i32:
-      output << "Vec2u32 " << name << ' '
-        << std::to_string(value.getFixed().vec2i32.x) << ' '
-        << std::to_string(value.getFixed().vec2i32.y) << '\n';
+      output << "Vec2i32 " << name << ' '
+        << value.getFixed().vec2i32.x << ' '
+        << value.getFixed().vec2i32.y << '\n';
       break;
 
     case ubt::Value::Type::Vec2i64:
-      output << "Vec2u64 " << name << ' '
-        << std::to_string(value.getFixed().vec2i64.x) << ' '
-        << std::to_string(value.getFixed().vec2i64.y) << '\n';
+      output << "Vec2i64 " << name << ' '
+        << value.getFixed().vec2i64.x << ' '
+        << value.getFixed().vec2i64.y << '\n';
       break;
 
-    case ubt::Value::Type::Vec2f:
+    case ubt::Value::Type::Vec2r32:
       output.precision(std::numeric_limits<float>::digits10);
 
-      output << "Vec2f " << name << ' '
-        << value.getFixed().vec2f.x << ' '
-        << value.getFixed().vec2f.y << '\n';
+      output << "Vec2r32 " << name << ' '
+        << value.getFixed().vec2r32.x << ' '
+        << value.getFixed().vec2r32.y << '\n';
       break;
 
-    case ubt::Value::Type::Vec2d:
+    case ubt::Value::Type::Vec2r64:
       output.precision(std::numeric_limits<double>::digits10);
 
-      output << "Vec2d " << name << ' '
-        << value.getFixed().vec2d.x << ' '
-        << value.getFixed().vec2d.y << '\n';
+      output << "Vec2r64 " << name << ' '
+        << value.getFixed().vec2r64.x << ' '
+        << value.getFixed().vec2r64.y << '\n';
       break;
 
     case ubt::Value::Type::Vec3u8:
       output << "Vec3u8 " << name << ' '
-        << std::to_string(value.getFixed().vec3u8.x) << ' '
-        << std::to_string(value.getFixed().vec3u8.y) << ' '
-        << std::to_string(value.getFixed().vec3u8.z) << '\n';
+        << static_cast<unsigned>(value.getFixed().vec3u8.x) << ' '
+        << static_cast<unsigned>(value.getFixed().vec3u8.y) << ' '
+        << static_cast<unsigned>(value.getFixed().vec3u8.z) << '\n';
       break;
 
     case ubt::Value::Type::Vec3u16:
       output << "Vec3u16 " << name << ' '
-        << std::to_string(value.getFixed().vec3u16.x) << ' '
-        << std::to_string(value.getFixed().vec3u16.y) << ' '
-        << std::to_string(value.getFixed().vec3u16.z) << '\n';
+        << value.getFixed().vec3u16.x << ' '
+        << value.getFixed().vec3u16.y << ' '
+        << value.getFixed().vec3u16.z << '\n';
       break;
 
     case ubt::Value::Type::Vec3u32:
       output << "Vec3u32 " << name << ' '
-        << std::to_string(value.getFixed().vec3u32.x) << ' '
-        << std::to_string(value.getFixed().vec3u32.y) << ' '
-        << std::to_string(value.getFixed().vec3u32.z) << '\n';
+        << value.getFixed().vec3u32.x << ' '
+        << value.getFixed().vec3u32.y << ' '
+        << value.getFixed().vec3u32.z << '\n';
       break;
 
     case ubt::Value::Type::Vec3u64:
       output << "Vec3u64 " << name << ' '
-        << std::to_string(value.getFixed().vec3u64.x) << ' '
-        << std::to_string(value.getFixed().vec3u64.y) << ' '
-        << std::to_string(value.getFixed().vec3u64.z) << '\n';
+        << value.getFixed().vec3u64.x << ' '
+        << value.getFixed().vec3u64.y << ' '
+        << value.getFixed().vec3u64.z << '\n';
       break;
 
     case ubt::Value::Type::Vec3i8:
       output << "Vec3i8 " << name << ' '
-        << std::to_string(value.getFixed().vec3i8.x) << ' '
-        << std::to_string(value.getFixed().vec3i8.y) << ' '
-        << std::to_string(value.getFixed().vec3i8.z) << '\n';
+        << static_cast<int>(value.getFixed().vec3i8.x) << ' '
+        << static_cast<int>(value.getFixed().vec3i8.y) << ' '
+        << static_cast<int>(value.getFixed().vec3i8.z) << '\n';
       break;
 
     case ubt::Value::Type::Vec3i16:
       output << "Vec3i16 " << name << ' '
-        << std::to_string(value.getFixed().vec3i16.x) << ' '
-        << std::to_string(value.getFixed().vec3i16.y) << ' '
-        << std::to_string(value.getFixed().vec3i16.z) << '\n';
+        << value.getFixed().vec3i16.x << ' '
+        << value.getFixed().vec3i16.y << ' '
+        << value.getFixed().vec3i16.z << '\n';
       break;
 
     case ubt::Value::Type::Vec3i32:
       output << "Vec3i32 " << name << ' '
-        << std::to_string(value.getFixed().vec3i32.x) << ' '
-        << std::to_string(value.getFixed().vec3i32.y) << ' '
-        << std::to_string(value.getFixed().vec3i32.z) << '\n';
+        << value.getFixed().vec3i32.x << ' '
+        << value.getFixed().vec3i32.y << ' '
+        << value.getFixed().vec3i32.z << '\n';
       break;
 
     case ubt::Value::Type::Vec3i64:
       output << "Vec3i64 " << name << ' '
-        << std::to_string(value.getFixed().vec3i64.x) << ' '
-        << std::to_string(value.getFixed().vec3i64.y) << ' '
-        << std::to_string(value.getFixed().vec3i64.z) << '\n';
+        << value.getFixed().vec3i64.x << ' '
+        << value.getFixed().vec3i64.y << ' '
+        << value.getFixed().vec3i64.z << '\n';
       break;
 
-    case ubt::Value::Type::Vec3f:
+    case ubt::Value::Type::Vec3r32:
       output.precision(std::numeric_limits<float>::digits10);
 
-      output << "Vec3f " << name << ' '
-        << value.getFixed().vec3f.x << ' '
-        << value.getFixed().vec3f.y << ' '
-        << value.getFixed().vec3f.z << '\n';
+      output << "Vec3r32 " << name << ' '
+        << value.getFixed().vec3r32.x << ' '
+        << value.getFixed().vec3r32.y << ' '
+        << value.getFixed().vec3r32.z << '\n';
       break;
 
-    case ubt::Value::Type::Vec3d:
+    case ubt::Value::Type::Vec3r64:
       output.precision(std::numeric_limits<double>::digits10);
 
-      output << "Vec3d " << name << ' '
-        << value.getFixed().vec3d.x << ' '
-        << value.getFixed().vec3d.y << ' '
-        << value.getFixed().vec3d.z << '\n';
+      output << "Vec3r64 " << name << ' '
+        << value.getFixed().vec3r64.x << ' '
+        << value.getFixed().vec3r64.y << ' '
+        << value.getFixed().vec3r64.z << '\n';
       break;
 
     case ubt::Value::Type::String:

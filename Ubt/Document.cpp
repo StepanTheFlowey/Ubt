@@ -153,7 +153,7 @@ namespace ubt {
 
       case Type::Vec2u32:
       case Type::Vec2i32:
-      case Type::Vec2f:
+      case Type::Vec2r32:
         loadString(name, input);
 
         if(input.read(reinterpret_cast<char*>(&fixed.vec2u32.x), sizeof(fixed.vec2u32.x)).gcount() != sizeof(fixed.vec2u32.x)) {
@@ -170,7 +170,7 @@ namespace ubt {
 
       case Type::Vec2u64:
       case Type::Vec2i64:
-      case Type::Vec2d:
+      case Type::Vec2r64:
         loadString(name, input);
 
         if(input.read(reinterpret_cast<char*>(&fixed.vec2u64.x), sizeof(fixed.vec2u64.x)).gcount() != sizeof(fixed.vec2u64.x)) {
@@ -224,7 +224,7 @@ namespace ubt {
 
       case Type::Vec3u32:
       case Type::Vec3i32:
-      case Type::Vec3f:
+      case Type::Vec3r32:
         loadString(name, input);
 
         if(input.read(reinterpret_cast<char*>(&fixed.vec3u32.x), sizeof(fixed.vec3u32.x)).gcount() != sizeof(fixed.vec3u32.x)) {
@@ -245,7 +245,7 @@ namespace ubt {
 
       case Type::Vec3u64:
       case Type::Vec3i64:
-      case Type::Vec3d:
+      case Type::Vec3r64:
         loadString(name, input);
 
         if(input.read(reinterpret_cast<char*>(&fixed.vec3u64.x), sizeof(fixed.vec3u64.x)).gcount() != sizeof(fixed.vec3u64.x)) {
@@ -383,7 +383,7 @@ namespace ubt {
 
       case Type::Vec2u32:
       case Type::Vec2i32:
-      case Type::Vec2f:
+      case Type::Vec2r32:
       {
         auto x = hton(thing.getFixed().vec2u32.x);
         auto y = hton(thing.getFixed().vec2u32.y);
@@ -395,7 +395,7 @@ namespace ubt {
 
       case Type::Vec2u64:
       case Type::Vec2i64:
-      case Type::Vec2d:
+      case Type::Vec2r64:
       {
         auto x = hton(thing.getFixed().vec2u64.x);
         auto y = hton(thing.getFixed().vec2u64.y);
@@ -433,7 +433,7 @@ namespace ubt {
 
       case Type::Vec3u32:
       case Type::Vec3i32:
-      case Type::Vec3f:
+      case Type::Vec3r32:
       {
         auto x = hton(thing.getFixed().vec3u32.x);
         auto y = hton(thing.getFixed().vec3u32.y);
@@ -447,7 +447,7 @@ namespace ubt {
 
       case Type::Vec3u64:
       case Type::Vec3i64:
-      case Type::Vec3d:
+      case Type::Vec3r64:
       {
         auto x = hton(thing.getFixed().vec3u64.x);
         auto y = hton(thing.getFixed().vec3u64.y);

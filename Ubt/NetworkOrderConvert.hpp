@@ -5,7 +5,7 @@
 #include <concepts>
 #include <algorithm>
 
-template<std::integral T>
+template <std::integral T>
 constexpr T byteswap(T value) noexcept {
   static_assert(std::has_unique_object_representations_v<T>, "T may not have padding bits");
   auto value_representation = std::bit_cast<std::array<std::byte, sizeof(T)>>(value);
@@ -13,7 +13,7 @@ constexpr T byteswap(T value) noexcept {
   return std::bit_cast<T>(value_representation);
 }
 
-template <typename T>
+template <std::integral T>
 T ntoh(const T n) {
   if constexpr(std::endian::native == std::endian::little) {
     return byteswap(n);
@@ -25,7 +25,7 @@ T ntoh(const T n) {
   return 0;
 }
 
-template <typename T>
-T hton(const T n) {
+template <std::integral T>
+T hton(const T& n) {
   return ntoh(n);
 }
