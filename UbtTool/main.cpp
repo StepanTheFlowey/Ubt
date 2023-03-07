@@ -182,6 +182,302 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       output.setFixed(fixed);
       break;
 
+    case strHashSwitch("Vec2u16"):
+      verbose("Tag Vec2u16");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec2u16.x = std::stoi(word);
+
+      input >> word;
+      fixed.vec2u16.y = std::stoi(word);
+
+      output.setType(ubt::Value::Type::Vec2u16);
+      output.setFixed(fixed);
+      break;
+
+    case strHashSwitch("Vec2u32"):
+      verbose("Tag Vec2u32");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec2u32.x = std::stoul(word);
+
+      input >> word;
+      fixed.vec2u32.y = std::stoul(word);
+
+      output.setType(ubt::Value::Type::Vec2u32);
+      output.setFixed(fixed);
+      break;
+
+    case strHashSwitch("Vec2u64"):
+      verbose("Tag Vec2u64");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec2u64.x = std::stoull(word);
+
+      input >> word;
+      fixed.vec2u64.y = std::stoull(word);
+
+      output.setType(ubt::Value::Type::Vec2u64);
+      output.setFixed(fixed);
+      break;
+
+    case strHashSwitch("Vec2i8"):
+      verbose("Tag Vec2i8");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec2i8.x = std::stoi(word);
+
+      input >> word;
+      fixed.vec2i8.y = std::stoi(word);
+
+      output.setType(ubt::Value::Type::Vec2i8);
+      output.setFixed(fixed);
+      break;
+
+    case strHashSwitch("Vec2i16"):
+      verbose("Tag Vec2i16");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec2i16.x = std::stoi(word);
+
+      input >> word;
+      fixed.vec2i16.y = std::stoi(word);
+
+      output.setType(ubt::Value::Type::Vec2i16);
+      output.setFixed(fixed);
+      break;
+
+    case strHashSwitch("Vec2i32"):
+      verbose("Tag Vec2i32");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec2i32.x = std::stol(word);
+
+      input >> word;
+      fixed.vec2i32.y = std::stol(word);
+
+      output.setType(ubt::Value::Type::Vec2i32);
+      output.setFixed(fixed);
+      break;
+
+    case strHashSwitch("Vec2i64"):
+      verbose("Tag Vec2i64");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec2i64.x = std::stoll(word);
+
+      input >> word;
+      fixed.vec2i64.y = std::stoll(word);
+
+      output.setType(ubt::Value::Type::Vec2i64);
+      output.setFixed(fixed);
+      break;
+
+    case strHashSwitch("Vec2f"):
+      verbose("Tag Vec2f");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec2f.x = std::stof(word);
+
+      input >> word;
+      fixed.vec2f.y = std::stof(word);
+
+      output.setType(ubt::Value::Type::Vec2f);
+      output.setFixed(fixed);
+      break;
+
+    case strHashSwitch("Vec2d"):
+      verbose("Tag Vec2d");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec2d.x = std::stod(word);
+
+      input >> word;
+      fixed.vec2d.y = std::stod(word);
+
+      output.setType(ubt::Value::Type::Vec2d);
+      output.setFixed(fixed);
+      break;
+
+    case strHashSwitch("Vec3u8"):
+      verbose("Tag Vec3u8");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec3u8.x = std::stoi(word);
+
+      input >> word;
+      fixed.vec3u8.y = std::stoi(word);
+
+      input >> word;
+      fixed.vec3u8.z = std::stoi(word);
+
+      output.setType(ubt::Value::Type::Vec3u8);
+      output.setFixed(fixed);
+      break;
+
+    case strHashSwitch("Vec3u16"):
+      verbose("Tag Vec3u16");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec3u16.x = std::stoi(word);
+
+      input >> word;
+      fixed.vec3u16.y = std::stoi(word);
+
+      input >> word;
+      fixed.vec3u16.z = std::stoi(word);
+
+      output.setType(ubt::Value::Type::Vec3u16);
+      output.setFixed(fixed);
+      break;
+
+    case strHashSwitch("Vec3u32"):
+      verbose("Tag Vec3u32");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec3u32.x = std::stoul(word);
+
+      input >> word;
+      fixed.vec3u32.y = std::stoul(word);
+
+      input >> word;
+      fixed.vec3u32.z = std::stoul(word);
+
+      output.setType(ubt::Value::Type::Vec3u32);
+      output.setFixed(fixed);
+      break;
+
+    case strHashSwitch("Vec3u64"):
+      verbose("Tag Vec3u64");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec3u64.x = std::stoull(word);
+
+      input >> word;
+      fixed.vec3u64.y = std::stoull(word);
+
+      input >> word;
+      fixed.vec3u64.z = std::stoull(word);
+
+      output.setType(ubt::Value::Type::Vec3u64);
+      output.setFixed(fixed);
+      break;
+
+    case strHashSwitch("Vec3i8"):
+      verbose("Tag Vec3i8");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec3i8.x = std::stoi(word);
+
+      input >> word;
+      fixed.vec3i8.y = std::stoi(word);
+
+      input >> word;
+      fixed.vec3i8.z = std::stoi(word);
+
+      output.setType(ubt::Value::Type::Vec3i8);
+      output.setFixed(fixed);
+      break;
+
+    case strHashSwitch("Vec3i16"):
+      verbose("Tag Vec3i16");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec3i16.x = std::stoi(word);
+
+      input >> word;
+      fixed.vec3i16.y = std::stoi(word);
+
+      input >> word;
+      fixed.vec3i16.z = std::stoi(word);
+
+      output.setType(ubt::Value::Type::Vec3i16);
+      output.setFixed(fixed);
+      break;
+
+    case strHashSwitch("Vec3i32"):
+      verbose("Tag Vec3i32");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec3i32.x = std::stol(word);
+
+      input >> word;
+      fixed.vec3i32.y = std::stol(word);
+
+      input >> word;
+      fixed.vec3i32.z = std::stol(word);
+
+      output.setType(ubt::Value::Type::Vec3i32);
+      output.setFixed(fixed);
+      break;
+
+    case strHashSwitch("Vec3i64"):
+      verbose("Tag Vec3i64");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec3i64.x = std::stoll(word);
+
+      input >> word;
+      fixed.vec3i64.y = std::stoll(word);
+
+      input >> word;
+      fixed.vec3i64.z = std::stoll(word);
+
+      output.setType(ubt::Value::Type::Vec3i64);
+      output.setFixed(fixed);
+      break;
+
+    case strHashSwitch("Vec3f"):
+      verbose("Tag Vec3f");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec3f.x = std::stof(word);
+
+      input >> word;
+      fixed.vec3f.y = std::stof(word);
+
+      input >> word;
+      fixed.vec3f.z = std::stof(word);
+
+      output.setType(ubt::Value::Type::Vec3f);
+      output.setFixed(fixed);
+      break;
+
+    case strHashSwitch("Vec3d"):
+      verbose("Tag Vec3d");
+      name = compileName(input);
+
+      input >> word;
+      fixed.vec3d.x = std::stod(word);
+
+      input >> word;
+      fixed.vec3d.y = std::stod(word);
+
+      input >> word;
+      fixed.vec3d.z = std::stod(word);
+
+      output.setType(ubt::Value::Type::Vec3d);
+      output.setFixed(fixed);
+      break;
+
     case strHashSwitch("String"):
       verbose("Tag String");
       name = compileName(input);
@@ -497,7 +793,7 @@ int main(int argc, char** argv) {
   bool doDecompile = false;
 
   std::string filenameInput;
-  std::string filenameOutput = "out.ubt";
+  std::string filenameOutput;
 
   {
     int wordCount = 0;
@@ -526,38 +822,53 @@ int main(int argc, char** argv) {
     }
   }
 
+  try {
+    if(doDecompile) {
+      ubt::Document document;
+      if(!document.load(filenameInput)) {
+        std::cout << "Failed to load input." << std::endl;
+        return EXIT_SUCCESS;
+      }
 
-  if(doDecompile) {
-    ubt::Document document;
-    if(!document.load(filenameInput)) {
-      std::cout << "Failed to load input." << std::endl;
-      return EXIT_SUCCESS;
+      if(filenameOutput.empty()) {
+        filenameOutput = "out.txt";
+      }
+      std::ofstream fileOutput(filenameOutput);
+      if(!fileOutput) {
+        std::cout << "Failed to open output file." << std::endl;
+        return EXIT_FAILURE;
+      }
+
+      decompile(document, fileOutput);
+      fileOutput.close();
     }
+    else {
+      std::ifstream fileInput(filenameInput);
+      if(!fileInput) {
+        std::cout << "Failed to open input file." << std::endl;
+        return EXIT_FAILURE;
+      }
 
-    std::ofstream fileOutput(filenameOutput);
-    if(!fileOutput) {
-      std::cout << "Failed to open output file." << std::endl;
-      return EXIT_FAILURE;
+      ubt::Document document;
+      compile(fileInput, document);
+      fileInput.close();
+
+      if(filenameOutput.empty()) {
+        filenameOutput = "out.ubt";
+      }
+      if(!document.save(filenameOutput)) {
+        std::cout << "Failed to save output." << std::endl;
+        return EXIT_FAILURE;
+      }
     }
-
-    decompile(document, fileOutput);
-    fileOutput.close();
   }
-  else {
-    std::ifstream fileInput(filenameInput);
-    if(!fileInput) {
-      std::cout << "Failed to open input file." << std::endl;
-      return EXIT_FAILURE;
-    }
-
-    ubt::Document document;
-    compile(fileInput, document);
-    fileInput.close();
-
-    if(!document.save(filenameOutput)) {
-      std::cout << "Failed to save output." << std::endl;
-      return EXIT_FAILURE;
-    }
+  catch(const std::out_of_range& e) {
+    std::cerr << "Out of range: " << e.what() << std::endl;
+    return EXIT_FAILURE;
+  }
+  catch(const std::invalid_argument& e) {
+    std::cerr << "Invalid argument: " << e.what() << std::endl;
+    return EXIT_FAILURE;
   }
 
   return EXIT_SUCCESS;

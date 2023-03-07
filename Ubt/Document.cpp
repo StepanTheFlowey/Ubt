@@ -38,12 +38,23 @@ namespace ubt {
     char ch = input.get();
     while(ch != '\0') {
       string->push_back(ch);
+      if(input.eof()) {
+        throw std::out_of_range("unexpected end of file!");
+      }
       ch = input.get();
     }
   }
 
   void Document::loadThing(Value& thing, std::string* name, std::istream& input) {
+    if(input.eof()) {
+      throw std::out_of_range("unexpected end of file!");
+    }
+
     thing.setType(static_cast<Type>(input.get()));
+
+    if(input.eof()) {
+      throw std::out_of_range("unexpected end of file!");
+    }
 
     Fixed fixed;
     switch(thing.getType()) {
@@ -213,6 +224,7 @@ namespace ubt {
 
       case Type::Vec3u32:
       case Type::Vec3i32:
+      case Type::Vec3f:
         loadString(name, input);
 
         if(input.read(reinterpret_cast<char*>(&fixed.vec3u32.x), sizeof(fixed.vec3u32.x)).gcount() != sizeof(fixed.vec3u32.x)) {
@@ -233,6 +245,7 @@ namespace ubt {
 
       case Type::Vec3u64:
       case Type::Vec3i64:
+      case Type::Vec3d:
         loadString(name, input);
 
         if(input.read(reinterpret_cast<char*>(&fixed.vec3u64.x), sizeof(fixed.vec3u64.x)).gcount() != sizeof(fixed.vec3u64.x)) {
@@ -241,7 +254,7 @@ namespace ubt {
         if(input.read(reinterpret_cast<char*>(&fixed.vec3u64.y), sizeof(fixed.vec3u64.y)).gcount() != sizeof(fixed.vec3u64.y)) {
 
         }
-        if(input.read(reinterpret_cast<char*>(&fixed.vec3u64.z), sizeof(fixed.vec3u64.y)).gcount() != sizeof(fixed.vec3u64.y)) {
+        if(input.read(reinterpret_cast<char*>(&fixed.vec3u64.z), sizeof(fixed.vec3u64.z)).gcount() != sizeof(fixed.vec3u64.z)) {
 
         }
         fixed.vec3u64.x = ntoh(fixed.vec3u64.x);
@@ -264,12 +277,9 @@ namespace ubt {
       case Type::Array:
         loadString(name, input);
 
-        {
-          std::string word;
-          do {
-            loadThing(thing.getArray().emplace_back(), &word, input);
-          } while(thing.getArray().back().getType() != Type::ArrayEnd);
-        }
+        do {
+          loadThing(thing.getArray().emplace_back(), nullptr, input);
+        } while(thing.getArray().back().getType() != Type::ArrayEnd);
         break;
 
       case Type::ArrayEnd:
