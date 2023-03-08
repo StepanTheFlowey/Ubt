@@ -874,12 +874,12 @@ int main(int argc, char** argv) {
       }
     }
   }
-  catch(const std::out_of_range& e) {
-    std::cout << "Out of range: " << e.what() << '.' << std::endl;
+  catch(const std::range_error& e) {
+    std::cout << "Range error: " << e.what() << '.' << std::endl;
     return EXIT_FAILURE;
   }
-  catch(const std::invalid_argument& e) {
-    std::cout << "Invalid argument: " << e.what() << '.' << std::endl;
+  catch(const std::runtime_error& e) {
+    std::cout << "Runtime error: " << e.what() << '.' << std::endl;
     return EXIT_FAILURE;
   }
 
