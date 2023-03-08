@@ -204,9 +204,15 @@ namespace ubt {
       case Type::Array:
         loadString(name, input);
 
-        do {
-          loadThing(thing.getArray().emplace_back(), nullptr, input);
-        } while(thing.getArray().back().getType() != Type::ArrayEnd);
+        {
+          ubt::Value value;
+
+          loadThing(value, nullptr, input);
+          while(value.getType() != Type::ArrayEnd) {
+            thing.getArray().push_back(value);
+            loadThing(value, nullptr, input);
+          };
+        }
         break;
 
       case Type::ArrayEnd:
@@ -218,12 +224,11 @@ namespace ubt {
         {
           ubt::Value value;
           std::string word;
-          while(true) {
-            loadThing(value, &word, input);
-            if(value.getType() == Type::ObjectEnd) {
-              break;
-            }
+
+          loadThing(value, &word, input);
+          while(value.getType() != Type::ObjectEnd) {
             thing[word] = value;
+            loadThing(value, &word, input);
           };
         }
         break;
@@ -343,11 +348,17 @@ namespace ubt {
         saveThing(Type::ArrayEnd, std::string(), output);
         break;
 
+      case Type::ArrayEnd:
+        break;
+
       case Type::Object:
         for(auto& [iKey, iVal] : thing.getObject()) {
           saveThing(iVal, iKey, output);
         }
         saveThing(Type::ObjectEnd, std::string(), output);
+        break;
+
+      case Type::ObjectEnd:
         break;
 
       default:

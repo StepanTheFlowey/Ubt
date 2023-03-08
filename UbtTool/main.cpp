@@ -21,7 +21,13 @@ std::string compileName(std::istream& input) {
   }
 
   input >> name;
-  verbose("Name \'" + name + '\'');
+
+  if(!std::isalpha(name.front())) {
+    std::cout << "Name \'" << name << "\' probably is not a name." << std::endl;
+  }
+  else {
+    verbose("Name \'" + name + '\'');
+  }
   return name;
 }
 
@@ -38,7 +44,6 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       output.setType(ubt::Value::Type::Null);
       break;
 
-    case strHashSwitch("Bool"):
     case strHashSwitch("Boolean"):
       verbose("Type Boolean");
       name = compileName(input);
@@ -51,8 +56,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
         fixed.boolean = false;
       }
       else {
-        std::cout << "Invalid value \'" << word << "\' for Bool \'" << name << "\'!\n";
-        exit(EXIT_FAILURE);
+        throw std::runtime_error(word + " is not boolean value");
       }
 
       output.setType(ubt::Value::Type::Boolean);
@@ -520,8 +524,8 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
           }
 
           output.getArray().push_back(value);
-
           compile(input, value, word);
+
           doReadTagName = false;
         }
       }
@@ -546,6 +550,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
           if(input.eof()) {
             throw std::runtime_error("unexpected eof");
           }
+
           output[word] = value;
           compile(input, value, word);
         }
@@ -558,7 +563,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     default:
-      throw std::range_error(word + " is not known type");
+      throw std::range_error(word + " is not known type to compiller");
   }
 }
 
@@ -783,7 +788,7 @@ void decompile(ubt::Value& value, std::ostream& output, const std::string& name,
       break;
 
     default:
-      throw std::range_error(std::to_string(static_cast<unsigned>(value.getType())) + " is not known type");
+      throw std::range_error(std::to_string(static_cast<unsigned>(value.getType())) + " is not known type to decompiller");
   }
 }
 
