@@ -1,6 +1,6 @@
+#include <stdexcept>
 #include <iostream>
 #include <fstream>
-#include <set>
 #include "StringSwitch.h"
 #include "../Ubt/Document.hpp"
 
@@ -33,14 +33,14 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
 
   switch(strHashSwitch(word)) {
     case strHashSwitch("Null"):
-      verbose("Tag Null");
+      verbose("Type Null");
       name = compileName(input);
       output.setType(ubt::Value::Type::Null);
       break;
 
     case strHashSwitch("Bool"):
     case strHashSwitch("Boolean"):
-      verbose("Tag Boolean");
+      verbose("Type Boolean");
       name = compileName(input);
 
       input >> word;
@@ -60,7 +60,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Uint8"):
-      verbose("Tag Uint8");
+      verbose("Type Uint8");
       name = compileName(input);
 
       input >> word;
@@ -71,7 +71,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Uint16"):
-      verbose("Tag Uint16");
+      verbose("Type Uint16");
       name = compileName(input);
 
       input >> word;
@@ -82,7 +82,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Uint32"):
-      verbose("Tag Uint32");
+      verbose("Type Uint32");
       name = compileName(input);
 
       input >> word;
@@ -93,7 +93,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Uint64"):
-      verbose("Tag Uint64");
+      verbose("Type Uint64");
       name = compileName(input);
 
       input >> word;
@@ -104,7 +104,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Int8"):
-      verbose("Tag Int8");
+      verbose("Type Int8");
       name = compileName(input);
 
       input >> word;
@@ -115,7 +115,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Int16"):
-      verbose("Tag Int16");
+      verbose("Type Int16");
       name = compileName(input);
 
       input >> word;
@@ -126,7 +126,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Int32"):
-      verbose("Tag Int32");
+      verbose("Type Int32");
       name = compileName(input);
 
       input >> word;
@@ -137,7 +137,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Int64"):
-      verbose("Tag Int64");
+      verbose("Type Int64");
       name = compileName(input);
 
       input >> word;
@@ -148,7 +148,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Real32"):
-      verbose("Tag Real32");
+      verbose("Type Real32");
       name = compileName(input);
 
       input >> word;
@@ -159,7 +159,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Real64"):
-      verbose("Tag Real64");
+      verbose("Type Real64");
       name = compileName(input);
 
       input >> word;
@@ -170,7 +170,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Vec2u8"):
-      verbose("Tag Vec2u8");
+      verbose("Type Vec2u8");
       name = compileName(input);
 
       input >> word;
@@ -184,7 +184,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Vec2u16"):
-      verbose("Tag Vec2u16");
+      verbose("Type Vec2u16");
       name = compileName(input);
 
       input >> word;
@@ -198,7 +198,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Vec2u32"):
-      verbose("Tag Vec2u32");
+      verbose("Type Vec2u32");
       name = compileName(input);
 
       input >> word;
@@ -212,7 +212,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Vec2u64"):
-      verbose("Tag Vec2u64");
+      verbose("Type Vec2u64");
       name = compileName(input);
 
       input >> word;
@@ -226,7 +226,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Vec2i8"):
-      verbose("Tag Vec2i8");
+      verbose("Type Vec2i8");
       name = compileName(input);
 
       input >> word;
@@ -240,7 +240,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Vec2i16"):
-      verbose("Tag Vec2i16");
+      verbose("Type Vec2i16");
       name = compileName(input);
 
       input >> word;
@@ -254,7 +254,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Vec2i32"):
-      verbose("Tag Vec2i32");
+      verbose("Type Vec2i32");
       name = compileName(input);
 
       input >> word;
@@ -268,7 +268,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Vec2i64"):
-      verbose("Tag Vec2i64");
+      verbose("Type Vec2i64");
       name = compileName(input);
 
       input >> word;
@@ -281,8 +281,8 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       output.setFixed(fixed);
       break;
 
-    case strHashSwitch("Vec2f"):
-      verbose("Tag Vec2f");
+    case strHashSwitch("Vec2r32"):
+      verbose("Type Vec2r32");
       name = compileName(input);
 
       input >> word;
@@ -295,8 +295,8 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       output.setFixed(fixed);
       break;
 
-    case strHashSwitch("Vec2d"):
-      verbose("Tag Vec2d");
+    case strHashSwitch("Vec2r64"):
+      verbose("Type Vec2r64");
       name = compileName(input);
 
       input >> word;
@@ -310,7 +310,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Vec3u8"):
-      verbose("Tag Vec3u8");
+      verbose("Type Vec3u8");
       name = compileName(input);
 
       input >> word;
@@ -327,7 +327,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Vec3u16"):
-      verbose("Tag Vec3u16");
+      verbose("Type Vec3u16");
       name = compileName(input);
 
       input >> word;
@@ -344,7 +344,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Vec3u32"):
-      verbose("Tag Vec3u32");
+      verbose("Type Vec3u32");
       name = compileName(input);
 
       input >> word;
@@ -361,7 +361,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Vec3u64"):
-      verbose("Tag Vec3u64");
+      verbose("Type Vec3u64");
       name = compileName(input);
 
       input >> word;
@@ -378,7 +378,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Vec3i8"):
-      verbose("Tag Vec3i8");
+      verbose("Type Vec3i8");
       name = compileName(input);
 
       input >> word;
@@ -395,7 +395,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Vec3i16"):
-      verbose("Tag Vec3i16");
+      verbose("Type Vec3i16");
       name = compileName(input);
 
       input >> word;
@@ -412,7 +412,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Vec3i32"):
-      verbose("Tag Vec3i32");
+      verbose("Type Vec3i32");
       name = compileName(input);
 
       input >> word;
@@ -429,7 +429,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("Vec3i64"):
-      verbose("Tag Vec3i64");
+      verbose("Type Vec3i64");
       name = compileName(input);
 
       input >> word;
@@ -445,8 +445,8 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       output.setFixed(fixed);
       break;
 
-    case strHashSwitch("Vec3f"):
-      verbose("Tag Vec3f");
+    case strHashSwitch("Vec3r32"):
+      verbose("Type Vec3r32");
       name = compileName(input);
 
       input >> word;
@@ -462,8 +462,8 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       output.setFixed(fixed);
       break;
 
-    case strHashSwitch("Vec3d"):
-      verbose("Tag Vec3d");
+    case strHashSwitch("Vec3r64"):
+      verbose("Type Vec3r64");
       name = compileName(input);
 
       input >> word;
@@ -480,27 +480,30 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("String"):
-      verbose("Tag String");
+      verbose("Type String");
       name = compileName(input);
 
       output.setType(ubt::Value::Type::String);
       {
         char ch = input.get();
         if(ch != '\"') {
-          std::cout << "String scope not beginned." << std::endl;
-          exit(EXIT_FAILURE);
+          throw std::runtime_error("string scope not beginned");
         }
-        ch = input.get();
+
+        input.get(ch);
         while(ch != '\"') {
+          if(input.eof()) {
+            throw std::runtime_error("unexpected eof");
+          }
           word.push_back(ch);
-          ch = input.get();
+          input.get(ch);
         }
       }
       output.setString(word);
       break;
 
     case strHashSwitch("Array"):
-      verbose("Tag Array");
+      verbose("Type Array");
       name = compileName(input);
 
       output.setType(ubt::Value::Type::Array);
@@ -513,8 +516,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
         compile(input, value, word);
         while(value.getType() != ubt::Value::Type::ArrayEnd) {
           if(input.eof()) {
-            std::cout << "Unexpected file end. Array scope not closed!" << std::endl;
-            exit(EXIT_FAILURE);
+            throw std::runtime_error("unexpected eof");
           }
 
           output.getArray().push_back(value);
@@ -527,12 +529,12 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("ArrayEnd"):
-      verbose("Tag ArrayEnd");
+      verbose("Type ArrayEnd");
       output.setType(ubt::Value::Type::ArrayEnd);
       break;
 
     case strHashSwitch("Object"):
-      verbose("Tag Object");
+      verbose("Type Object");
       name = compileName(input);
 
       output.setType(ubt::Value::Type::Object);
@@ -542,8 +544,7 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
         compile(input, value, word);
         while(value.getType() != ubt::Value::Type::ObjectEnd) {
           if(input.eof()) {
-            std::cout << "Unexpected file end. Object scope not closed!" << std::endl;
-            exit(EXIT_FAILURE);
+            throw std::runtime_error("unexpected eof");
           }
           output[word] = value;
           compile(input, value, word);
@@ -552,9 +553,12 @@ void compile(std::istream& input, ubt::Value& output, std::string& name) {
       break;
 
     case strHashSwitch("ObjectEnd"):
-      verbose("Tag ObjectEnd");
+      verbose("Type ObjectEnd");
       output.setType(ubt::Value::Type::ObjectEnd);
       break;
+
+    default:
+      throw std::range_error(word + " is not known type");
   }
 }
 
@@ -765,7 +769,7 @@ void decompile(ubt::Value& value, std::ostream& output, const std::string& name,
         decompile(i, output, "", space + 1);
       }
 
-      output << "ArrayEnd\n";
+      output << std::string(space * 2, ' ') << "ArrayEnd\n";
       break;
 
     case ubt::Value::Type::Object:
@@ -775,8 +779,11 @@ void decompile(ubt::Value& value, std::ostream& output, const std::string& name,
         decompile(iVal, output, iKey, space + 1);
       }
 
-      output << "ObjectEnd\n";
+      output << std::string(space * 2, ' ') << "ObjectEnd\n";
       break;
+
+    default:
+      throw std::range_error(std::to_string(static_cast<unsigned>(value.getType())) + " is not known type");
   }
 }
 
@@ -826,7 +833,7 @@ int main(int argc, char** argv) {
   try {
     if(doDecompile) {
       ubt::Document document;
-      if(!document.load(filenameInput)) {
+      if(!document.loadFromFile(filenameInput)) {
         std::cout << "Failed to load input." << std::endl;
         return EXIT_SUCCESS;
       }
@@ -834,7 +841,9 @@ int main(int argc, char** argv) {
       if(filenameOutput.empty()) {
         filenameOutput = "out.txt";
       }
+
       std::ofstream fileOutput(filenameOutput);
+
       if(!fileOutput) {
         std::cout << "Failed to open output file." << std::endl;
         return EXIT_FAILURE;
@@ -845,6 +854,7 @@ int main(int argc, char** argv) {
     }
     else {
       std::ifstream fileInput(filenameInput);
+
       if(!fileInput) {
         std::cout << "Failed to open input file." << std::endl;
         return EXIT_FAILURE;
@@ -857,18 +867,19 @@ int main(int argc, char** argv) {
       if(filenameOutput.empty()) {
         filenameOutput = "out.ubt";
       }
-      if(!document.save(filenameOutput)) {
+
+      if(!document.saveToFile(filenameOutput)) {
         std::cout << "Failed to save output." << std::endl;
         return EXIT_FAILURE;
       }
     }
   }
   catch(const std::out_of_range& e) {
-    std::cerr << "Out of range: " << e.what() << std::endl;
+    std::cout << "Out of range: " << e.what() << '.' << std::endl;
     return EXIT_FAILURE;
   }
   catch(const std::invalid_argument& e) {
-    std::cerr << "Invalid argument: " << e.what() << std::endl;
+    std::cout << "Invalid argument: " << e.what() << '.' << std::endl;
     return EXIT_FAILURE;
   }
 

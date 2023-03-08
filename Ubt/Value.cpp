@@ -1,6 +1,6 @@
 #include "Value.hpp"
 
-#include <exception>
+#include <stdexcept>
 
 namespace ubt {
   Value::Value(const Type type) {
@@ -66,7 +66,7 @@ namespace ubt {
 
   const std::string& Value::getString() const {
     if(type_ != Type::String) {
-      throw std::exception("Type is not string");
+      throw std::logic_error("Type is not String");
     }
 
     return *variable_.ptrString;
@@ -74,7 +74,7 @@ namespace ubt {
 
   void Value::setString(const std::string& string) {
     if(type_ != Type::String) {
-      throw std::exception("Type is not string");
+      throw std::logic_error("type is not String");
     }
 
     *variable_.ptrString = string;
@@ -82,7 +82,7 @@ namespace ubt {
 
   std::vector<Value>& Value::getArray() const {
     if(type_ != Type::Array) {
-      throw std::exception("Type is not array");
+      throw std::logic_error("type is not Array");
     }
 
     return *variable_.ptrArray;
@@ -90,7 +90,7 @@ namespace ubt {
 
   void Value::setArray(const std::vector<Value>& array) {
     if(type_ != Type::Array) {
-      throw std::exception("Type is not array");
+      throw std::logic_error("type is not Array");
     }
 
     *variable_.ptrArray = array;
@@ -98,7 +98,7 @@ namespace ubt {
 
   std::unordered_map<std::string, Value>& Value::getObject() const {
     if(type_ != Type::Object) {
-      throw std::exception("Type is not object");
+      throw std::logic_error("type is not Object");
     }
 
     return *variable_.ptrObject;
@@ -106,7 +106,7 @@ namespace ubt {
 
   void Value::setObject(const std::unordered_map<std::string, Value>& object) {
     if(type_ != Type::Object) {
-      throw std::exception("Type is not object");
+      throw std::logic_error("type is not Object");
     }
 
     *variable_.ptrObject = object;
@@ -114,7 +114,7 @@ namespace ubt {
 
   Value& Value::operator[](const uintptr_t index) {
     if(type_ != Type::Array) {
-      throw std::exception("Type is not array");
+      throw std::logic_error("type is not array");
     }
 
     return (*variable_.ptrArray)[index];
@@ -122,7 +122,7 @@ namespace ubt {
 
   Value& Value::operator[](const std::string& string) {
     if(type_ != Type::Object) {
-      throw std::exception("Type is not object");
+      throw std::logic_error("type is not object");
     }
 
     return (*variable_.ptrObject)[string];
